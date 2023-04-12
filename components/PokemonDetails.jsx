@@ -5,9 +5,10 @@ import Modal from "./Modal";
 import client from "@/apollo/apollo-client";
 import { gql } from "@apollo/client";
 import fetchEvolution from "@/lib/fetchEvolutions";
+import Link from "next/link";
 
 export default function PokemonDetails({ pokemon }) {
-  const { id, name, image, height, weight, classification, types, weaknesses, resistant } = pokemon;
+  const { id, name, image, height, number, weight, classification, types, weaknesses, resistant } = pokemon;
   const [open, setOpen] = useState(false)
   const [evolutions, setEvolutions] = useState(null);
 
@@ -22,49 +23,61 @@ export default function PokemonDetails({ pokemon }) {
     }
   };
   return (
-    <div className="pokedex bg-gray-100 rounded-lg  shadow-md px-6  min-h-screen flex flex-col items-center">
-      <div className="pokedex__screen__details__name text-4xl font-bold capitalize my-10">{name} <span className="pokedex__screen__details__number text-gray-500 text-4xl">#{pokemon.number}</span></div>
+    <div className="  bg-[url('https://i.imgur.com/fmsNNrp.png')] shadow-md px-6  min-h-screen flex flex-col items-center">
 
-      <div className="pokedex__screen gap-10 bg-white rounded-lg flex justify-center flex-col shadow-md ">
-        <div className="flex flex-row items-center p-10 ">
+      <div className=" bg-white rounded-xl mt-10 flex justify-center flex-col shadow-md ">
+        <div className="p-4 flex gap-1 items-center">
+          <Link href='/'>
 
-          <div className="pokedex__screen__image-container">
-            <img className="pokedex__screen__image h-72 w-72 p-10 object-contain" src={image} alt={name} />
+            <svg
+              viewBox="0 0 24 24"
+              fill="red"
+              className="w-10 mr-5 h-10 p-2 rounded-full border-2 border-red-500"
+            >
+              <path d="M12.74 2.32a1 1 0 00-1.48 0l-9 10A1 1 0 003 14h2v7a1 1 0 001 1h12a1 1 0 001-1v-7h2a1 1 0 001-1 1 1 0 00-.26-.68z" />
+            </svg></Link>
+          <div className="text-4xl  font-semibold">{name}</div>
+          <div className="text-xl  text-gray-500 font-semibold">#{number}</div>
+        </div>
+        <div className="flex flex-row items-center p-1 ">
+
+          <div className="">
+            <img className=" h-72 w-72 p-10 object-contain" src={image} alt={name} />
           </div>
-          <div className="pokedex__screen__details mt-4 grid grid-cols-2 gap-x-10">
-            <div className=" mt-4">
-              <div className=" font-bold text-gray-500">Height:</div>
-              <div className=" text-gray-700">{height.maximum} </div>
+          <div className="  grid  p-4 rounded-xl grid-cols-2 gap-2 gap-x-4">
+            <div className="  p-2 flex rounded-xl gap-4">
+              <div className=" font-semibold  ">Height:</div>
+              <div className=" ">{height.maximum} </div>
             </div>
-            <div className=" mt-2">
-              <div className=" font-bold text-gray-500">Weight:</div>
-              <div className=" text-gray-700">{weight.maximum} </div>
+            <div className="  p-2 flex rounded-xl gap-4">
+              <div className=" font-semibold  ">Weight:</div>
+              <div className=" ">{weight.maximum} </div>
             </div>
-            <div className=" mt-2">
-              <div className=" font-bold text-gray-500">Classification:</div>
-              <div className=" text-gray-700 capitalize">{classification}</div>
+            <div className="  p-2 h-fit rounded-xl">
+              <div className=" font-semibold mb-2 ">Classification:</div>
+              <div className="  capitalize">{classification}</div>
             </div>
-            <div className=" mt-2">
-              <div className=" font-bold text-gray-500">Type:</div>
-              <div className=" text-gray-700 grid grid-cols-3 grid-flow-row-dense grid-rows-2 gap-2 ">
+            <div className="  p-2 h-fit rounded-xl">
+              <div className=" font-semibold mb-2 ">Type</div>
+              <div className="  grid grid-cols-2  grid-rows-1 gap-2 ">
                 {types.map((type, index) => <Type key={index} text={type} />)}
               </div>
             </div>
-            <div className=" mt-2">
-              <div className=" font-bold text-gray-500">Weakness:</div>
-              <div className=" text-gray-700 grid grid-cols-3 grid-rows-2 gap-2 ">
+            <div className="  p-2 h-fit rounded-xl">
+              <div className=" font-semibold mb-2 ">Weakness:</div>
+              <div className="  grid grid-cols-3 grid-rows-2 gap-2 ">
                 {weaknesses.map((weakness, index) => <Type key={index} text={weakness} />)}
               </div>
             </div>
-            <div className=" mt-2">
-              <div className=" font-bold text-gray-500">Resistance:</div>
-              <div className=" text-gray-700 grid grid-cols-3 grid-rows-2 gap-2 ">
+            <div className="  p-2 rounded-xl">
+              <div className=" font-semibold mb-2 ">Resistance:</div>
+              <div className="  grid grid-cols-3 grid-rows-2 gap-2 ">
                 {resistant.map((resistance, index) => <Type key={index} text={resistance} />)}
               </div>
             </div>
           </div>
         </div>
-        <button className="bg-red-500 px-10  py-3 rounded-b-lg text-white" onClick={() => { setOpen(true), handleShowEvolutions() }}>Show Evolutions</button>
+        <button className="border-4 text-red-500 font-semibold border-red-500 px-10  my-5 w-fit py-3 rounded-full mx-auto " onClick={() => { setOpen(true), handleShowEvolutions() }}>Show Evolutions</button>
 
       </div>
 
