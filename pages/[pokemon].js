@@ -7,8 +7,9 @@ export default function PokemonDetailPage(props) {
   const pokemon = props.pokemon;
   console.log('pokemon:', pokemon);
   return (
-    <div>
-      <PokemonDetails pokemon={pokemon || pokemon.pokemon} />
+    <div>{pokemon &&
+      <PokemonDetails pokemon={pokemon || pokemon?.pokemon} />
+    }
     </div>
   );
 }
@@ -63,7 +64,7 @@ export async function getStaticProps(context) {
     };
   }
 }
-export async function getStaticPaths() {
+export async function getStaticPaths({ pokemon }) {
   const limit = 20;
 
   const { data } = await client.query({

@@ -40,7 +40,7 @@ export default function Pagination(props) {
                 <button
                   onClick={() => setcurrentPage(i + 1)}
                   aria-current="page"
-                  className={`relative z-10 inline-flex  items-center rounded-full ${i + 1 === currentPage ? `bg-red-600` : ' text-gray-500'} h-9 w-9 mx-2 flex justify-center text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                  className={`relative z-10 inline-flex  items-center rounded-full ${i + 1 === currentPage ? `bg-red-600 text-white ` : ' text-gray-500'} h-9 w-9 mx-2 flex justify-center text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
                 >
                   {i + 1}
                 </button>)}
