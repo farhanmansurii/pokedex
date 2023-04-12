@@ -23,9 +23,9 @@ export default function PokemonDetailPage(props) {
 }
 
 
-export async function getStaticProps({ params }) {
-  const { pokemon } = params
-
+export async function getStaticProps(context) {
+  const { pokemon } = context.params
+  console.log(pokemon)
   const { data } = await client.query({
     query: gql`
       query pokemon($name: String){
