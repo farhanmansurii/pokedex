@@ -5,10 +5,9 @@ import React from 'react';
 
 export default function PokemonDetailPage(props) {
   const pokemon = props.pokemon;
-  console.log('pokemon:', pokemon);
   return (
     <div>{pokemon &&
-      <PokemonDetails pokemon={pokemon || pokemon?.pokemon} />
+      <PokemonDetails pokemon={pokemon} />
     }
     </div>
   );
@@ -17,7 +16,6 @@ export default function PokemonDetailPage(props) {
 
 export async function getStaticProps(context) {
   const { pokemon } = context.params;
-  console.log('getStaticProps:', pokemon);
   try
   {
     const { data } = await client.query({
@@ -39,9 +37,6 @@ export async function getStaticProps(context) {
             types
             resistant
             weaknesses
-            fleeRate
-            maxCP
-            maxHP
             image
           }
         }

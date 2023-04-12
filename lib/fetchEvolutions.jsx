@@ -16,7 +16,6 @@ export default async function fetchEvolution(id) {
               id
               number
               name
-              
               image
             }
           }
