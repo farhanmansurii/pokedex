@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import EvolutionPopup from "./PokemonEvolutions";
 import Type from "./Type";
 import Modal from "./Modal";
-import client from "@/apollo/apollo-client";
-import { gql } from "@apollo/client";
+
 import fetchEvolution from "@/lib/fetchEvolutions";
 import Link from "next/link";
 
@@ -32,7 +30,7 @@ export default function PokemonDetails({ pokemon }) {
             <svg
               viewBox="0 0 24 24"
               fill="red"
-              className="w-10 mr-5 h-10 p-2 rounded-full border-2 border-red-500"
+              className="w-12 mr-5 h-12 p-2 rounded-full border-2 border-red-500"
             >
               <path d="M12.74 2.32a1 1 0 00-1.48 0l-9 10A1 1 0 003 14h2v7a1 1 0 001 1h12a1 1 0 001-1v-7h2a1 1 0 001-1 1 1 0 00-.26-.68z" />
             </svg></Link>

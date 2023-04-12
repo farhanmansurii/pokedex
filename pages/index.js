@@ -1,13 +1,10 @@
 
 import client from '@/apollo/apollo-client';
-import Modal from '@/components/Modal';
 import Navbar from '@/components/Navbar';
 import Pagination from '@/components/Pagination';
-import Example from '@/components/Pagination';
 import PokemonCard from '@/components/PokemonCard';
 import { gql } from '@apollo/client';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 
@@ -58,9 +55,6 @@ export async function getStaticProps() {
           number
           name
           types
-          resistant
-          maxCP
-          maxHP
           image
         }
       }

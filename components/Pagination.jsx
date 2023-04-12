@@ -23,7 +23,7 @@ export default function Pagination(props) {
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">{startIndex + 1}</span> to <span className="font-medium">{endIndex < pokemons.length ? endIndex + 1 : pokemons.length}</span> of{' '}
+            Showing <span className="font-medium">{startIndex + 1}</span> to <span className="font-medium">{endIndex < pokemons.length ? endIndex : pokemons.length}</span> of{' '}
             <span className="font-medium">{pokemons.length}</span> results
           </p>
         </div>
