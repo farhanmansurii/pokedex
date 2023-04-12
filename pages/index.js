@@ -47,7 +47,7 @@ export default function Home(props) {
 
 export async function getStaticProps() {
 
-  const limit = 1510;
+  const limit = 151;
 
 
   const { data } = await client.query({
