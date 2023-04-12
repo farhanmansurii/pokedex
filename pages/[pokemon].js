@@ -4,17 +4,19 @@ import { gql } from '@apollo/client';
 import React from 'react';
 
 export default function PokemonDetailPage(props) {
-  const pokemon = props.data.pokemon;
-  console.log(props)
+  const pokemon = props.pokemon;
+  console.log('pokemon:', pokemon);
   return (
     <div>
-      <PokemonDetails pokemon={pokemon} />
+      <PokemonDetails pokemon={pokemon || pokemon.pokemon} />
     </div>
   );
 }
 
+
 export async function getStaticProps(context) {
   const { pokemon } = context.params;
+  console.log('getStaticProps:', pokemon);
   try
   {
     const { data } = await client.query({
@@ -47,54 +49,42 @@ export async function getStaticProps(context) {
         name: pokemon,
       },
     });
+
     return {
       props: {
-        data,
+        pokemon: data.pokemon,
       },
     };
   } catch (error)
   {
     console.error(error);
     return {
-      props: {
-        data: {},
-      },
+      notFound: true,
     };
   }
 }
-
 export async function getStaticPaths() {
   const limit = 20;
 
-  try
-  {
-    const { data } = await client.query({
-      query: gql`
-        query Pokemons($first: Int!) {
-          pokemons(first: $first) {
-            name
-          }
+  const { data } = await client.query({
+    query: gql`
+      query Pokemons($first: Int!) {
+        pokemons(first: $first) {
+          name
         }
-      `,
-      variables: {
-        first: limit,
-      },
-    });
+      }
+    `,
+    variables: {
+      first: limit,
+    },
+  });
 
-    const paths = data.pokemons.map((pokemon) => ({
-      params: { pokemon: pokemon.name },
-    }));
+  const paths = data.pokemons.map((pokemon) => ({
+    params: { pokemon: pokemon.name },
+  }));
 
-    return {
-      paths,
-      fallback: true,
-    };
-  } catch (error)
-  {
-    console.error(error);
-    return {
-      paths: [],
-      fallback: true,
-    };
-  }
+  return {
+    paths,
+    fallback: true,
+  };
 }
