@@ -5,7 +5,7 @@ import React from 'react';
 
 export default function PokemonDetailPage(props) {
   const pokemon = props.data.pokemon;
-
+  console.log(props)
   return (
     <div>
       <PokemonDetails pokemon={pokemon} />
