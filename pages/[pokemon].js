@@ -61,28 +61,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-export async function getStaticPaths() {
-  const limit = 20;
-
-  const { data } = await client.query({
-    query: gql`
-      query Pokemons($first: Int!) {
-        pokemons(first: $first) {
-          name
-        }
-      }
-    `,
-    variables: {
-      first: limit,
-    },
-  });
-
-  const paths = data.pokemons.map((pokemon) => ({
-    params: { pokemon: pokemon.name },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
