@@ -23,9 +23,10 @@ export default function PokemonDetailPage(props) {
 }
 
 
-export async function getServerSideProps(context) {
+export async function getStaticProps({ params }) {
 
-  const pokemonId = (context.query.pokemon)
+  const { pokemon } = params
+  console.log(pokemon)
   const { data } = await client.query({
     query: gql`
       query pokemon($name: String){
@@ -52,12 +53,37 @@ export async function getServerSideProps(context) {
   }
 }`,
     variables: {
-      name: pokemonId,
+      name: pokemon,
     },
   });
   return {
     props: {
       data
     },
+  };
+}
+export async function getStaticPaths() {
+  const limit = 20;
+
+  const { data } = await client.query({
+    query: gql`
+      query Pokemons($first: Int!) {
+        pokemons(first: $first) {
+          name
+        }
+      }
+    `,
+    variables: {
+      first: limit,
+    },
+  });
+
+  const paths = data.pokemons.map((pokemon) => ({
+    params: { pokemon: pokemon.name },
+  }));
+
+  return {
+    paths,
+    fallback: false,
   };
 }
